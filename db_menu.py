@@ -71,6 +71,9 @@ def main():
             display_all_rows_5.display_rows()
 
         elif choice == DISPLAY_SINGLE_ROW_CHOICE:
+            display_one_row_6.display_one_row()
+
+        elif choice == QUIT_CHOICE:
             break
 
         else:
