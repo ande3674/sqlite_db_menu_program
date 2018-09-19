@@ -65,7 +65,7 @@ def main():
             # conn.close()
 
         elif choice == DELETE_ROW_CHOICE:
-            break
+            delete_row_4.delete_row()
 
         elif choice == DISPLAY_ALL_ROWS_CHOICE:
             display_all_rows_5.display_rows()
