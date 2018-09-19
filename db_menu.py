@@ -68,7 +68,7 @@ def main():
             break
 
         elif choice == DISPLAY_ALL_ROWS_CHOICE:
-            break
+            display_all_rows_5.display_rows()
 
         elif choice == DISPLAY_SINGLE_ROW_CHOICE:
             break
