@@ -19,7 +19,6 @@ QUIT_CHOICE = 7
 
 
 def main():
-    PRODUCT_KEY = 0
     choice = 0
 
     while choice != QUIT_CHOICE:
@@ -41,8 +40,7 @@ def main():
             create_db_table_1.create_db_and_table()
 
         elif choice == ADD_ROW_CHOICE:
-            PRODUCT_KEY += 1
-            add_row_2.add_row(PRODUCT_KEY)
+            add_row_2.add_row()
             # conn = sqlite3.connect('products.sqlite')
             # c = conn.cursor()
             # c.execute("SELECT * FROM {tn}".format(tn='products'))
@@ -50,12 +48,21 @@ def main():
             #     print("PRODUCT KEY:", row[0])
             #     print('PRODUCT NAME:', str(row[1]))
             #     print('PRODUCT PRICE:', str(row[2]))
-            # c.commit()
-            # c.close()
+            # conn.commit()
+            # conn.close()
 
 
         elif choice == UPDATE_ROW_CHOICE:
-            break
+            update_row_3.update_row()
+            # conn = sqlite3.connect('products.sqlite')
+            # c = conn.cursor()
+            # c.execute("SELECT * FROM {tn}".format(tn='products'))
+            # for row in c:
+            #     print("PRODUCT KEY:", row[0])
+            #     print('PRODUCT NAME:', str(row[1]))
+            #     print('PRODUCT PRICE:', str(row[2]))
+            # conn.commit()
+            # conn.close()
 
         elif choice == DELETE_ROW_CHOICE:
             break

@@ -11,11 +11,12 @@ num_in_stock_field = 'number_in_stock'
 cost_to_make_field = 'cost_to_make'
 num_sold_field = 'number_sold'
 
-def add_row(p_key):
+def add_row():
     print()
     print('Enter information for the product...')
 
     try:
+        p_key = int(input("Enter the unique product key: "))
         p_name = input("Enter the product name: ")
         price = float(input("Enter the sale price for the product: "))
         p_desc = input("Enter the product description: ")
