@@ -12,55 +12,60 @@ cost_to_make_field = 'cost_to_make'
 num_sold_field = 'number_sold'
 
 def update_row():
-    # select row to update
-    id_value = int(input("Enter the product id of the product you would like to update: "))
 
-    # select column to update
-    print('Please select which column you want to update: ')
-    display_column_selection_menu()
-    print()
-    update_choice = 0
-    while (update_choice < 1 or update_choice > 6):
-        update_choice = int(input("Column number: "))
+    try:
+        # select row to update
+        id_value = int(input("Enter the product id of the product you would like to update: "))
 
-    # get the new column value
-    if (update_choice == 1 or update_choice == 3):
-        update_value = input('Enter the new value: ')
-        update_value += '"'
-    else:
-        update_value = int(input('Enter the new value: '))
+        # select column to update
+        print('Please select which column you want to update: ')
+        display_column_selection_menu()
+        print()
+        update_choice = 0
+        while (update_choice < 1 or update_choice > 6):
+            update_choice = int(input("Column number: "))
 
-    # build sql statement
-    #UPDATE products SET {cn}=col_val WHERE id=id_val
-    sql_statement = "UPDATE products SET "
+        # get the new column value
+        if (update_choice == 1 or update_choice == 3):
+            update_value = input('Enter the new value: ')
+            update_value += '"'
+        else:
+            update_value = int(input('Enter the new value: '))
 
-    if (update_choice == 1):
-        sql_statement += 'name = "'
-    elif (update_choice == 2):
-        sql_statement += "price = "
-    elif (update_choice == 3):
-        sql_statement += 'description = "'
-    elif (update_choice == 4):
-        sql_statement += "number_in_stock = "
-    elif (update_choice == 5):
-        sql_statement += "cost_to_make = "
-    else: # (update_choice == 6):
-        sql_statement += "number_sold = "
+        # build sql statement
+        #UPDATE products SET {cn}=col_val WHERE id=id_val
+        sql_statement = "UPDATE products SET "
 
-    sql_statement += str(update_value)
-    sql_statement += " WHERE id="
-    sql_statement += str(id_value)
+        if (update_choice == 1):
+            sql_statement += 'name = "'
+        elif (update_choice == 2):
+            sql_statement += "price = "
+        elif (update_choice == 3):
+            sql_statement += 'description = "'
+        elif (update_choice == 4):
+            sql_statement += "number_in_stock = "
+        elif (update_choice == 5):
+            sql_statement += "cost_to_make = "
+        else: # (update_choice == 6):
+            sql_statement += "number_sold = "
 
-    conn = sqlite3.connect(sqlite_file)
-    c = conn.cursor()
+        sql_statement += str(update_value)
+        sql_statement += " WHERE id="
+        sql_statement += str(id_value)
 
-    c.execute(sql_statement)
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor()
 
-    print("Updated product number", str(id_value), "successfully.")
-    print()
+        c.execute(sql_statement)
 
-    conn.commit()
-    conn.close()
+        print("Updated product number", str(id_value), "successfully.")
+        print()
+
+        conn.commit()
+        conn.close()
+
+    except ValueError:
+        print('There was an error updating the row, please double check your data and try again.')
 
 def display_column_selection_menu():
 

@@ -37,9 +37,10 @@ def add_row():
         conn.commit()
         conn.close()
 
+        print('Row added successfully.')
+
     except ValueError:
         print("ERROR! Double check your input and try again...")
         print()
 
-    print('Row added successfully.')
     print()

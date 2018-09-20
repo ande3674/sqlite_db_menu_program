@@ -17,12 +17,16 @@ def delete_row():
     print('Here is the table info: ')
     display_all_rows_5.display_rows()
 
-    choice = int(input("Enter the ID of the row you wish to delete: "))
+    try:
+        choice = int(input("Enter the ID of the row you wish to delete: "))
 
-    conn = sqlite3.connect(sqlite_file)
-    c = conn.cursor()
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor()
 
-    c.execute("DELETE FROM {tn} WHERE {cn}={v}".format(tn=products_table, cn=id_field, v=choice))
+        c.execute("DELETE FROM {tn} WHERE {cn}={v}".format(tn=products_table, cn=id_field, v=choice))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+
+    except ValueError:
+        print('There was an error deleting the row, please double check your data and try again.')

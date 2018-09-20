@@ -41,28 +41,9 @@ def main():
 
         elif choice == ADD_ROW_CHOICE:
             add_row_2.add_row()
-            # conn = sqlite3.connect('products.sqlite')
-            # c = conn.cursor()
-            # c.execute("SELECT * FROM {tn}".format(tn='products'))
-            # for row in c:
-            #     print("PRODUCT KEY:", row[0])
-            #     print('PRODUCT NAME:', str(row[1]))
-            #     print('PRODUCT PRICE:', str(row[2]))
-            # conn.commit()
-            # conn.close()
-
 
         elif choice == UPDATE_ROW_CHOICE:
             update_row_3.update_row()
-            # conn = sqlite3.connect('products.sqlite')
-            # c = conn.cursor()
-            # c.execute("SELECT * FROM {tn}".format(tn='products'))
-            # for row in c:
-            #     print("PRODUCT KEY:", row[0])
-            #     print('PRODUCT NAME:', str(row[1]))
-            #     print('PRODUCT PRICE:', str(row[2]))
-            # conn.commit()
-            # conn.close()
 
         elif choice == DELETE_ROW_CHOICE:
             delete_row_4.delete_row()
@@ -77,8 +58,12 @@ def main():
             break
 
         else:
-            choice = int(input('Invalid menu number. Select a menu option by entering the menu number: '))
-            print('')
+            try:
+                choice = int(input('Invalid menu number. Select a menu option by entering the menu number: '))
+                print('')
+            except ValueError:
+                print('ERROR: You must enter a number.')
+                print('')
 
     print('Thanks for using the products database program')
 

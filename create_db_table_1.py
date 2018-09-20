@@ -29,6 +29,7 @@ cost_to_make_field_type = 'REAL'
 num_sold_field = 'number_sold'
 num_sold_field_type = 'INTEGER'
 
+
 def create_db_and_table():
     # Create the database ...
     conn = sqlite3.connect(sqlite_file)
@@ -46,11 +47,6 @@ def create_db_and_table():
     c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}".format(tn=products_table, cn=num_sold_field, ct=num_sold_field_type))
 
     c.execute("INSERT INTO {tn} ({c1}, {c2}, {c3}, {c4}, {c5}, {c6}, {c7}) VALUES (0, 't-shirt', 25.50, 'red t-shirt', 12, 3.50, 4)".format(tn=products_table, c1=id_field, c2=name_field, c3=price_field, c4=description_field, c5=num_in_stock_field, c6=cost_to_make_field, c7=num_sold_field))
-
-    #c.execute("SELECT * FROM {}".format(products_table))
-    #for row in c:
-        #print(row[0])
-        #print(row[1])
 
     # commit and close connection
     conn.commit()

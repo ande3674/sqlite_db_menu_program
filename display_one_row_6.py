@@ -17,58 +17,63 @@ def display_one_row():
     # user picks what col they want to select
     display_column_selection_menu()
     print()
-    selection = 0
-    while selection < 1 or selection > 6:
-        selection = int(input("Enter the column you want to select for by entering 1-6: "))
 
-    # user enters col match information
-    update_to = input("What is the selected for column supposed to match?: ")
+    try:
+        selection = 0
+        while selection < 1 or selection > 6:
+            selection = int(input("Enter the column you want to select for by entering 1-6: "))
 
-    # select and display one row that matches the input
-    # SELECT * FROM {tn} WHERE col_choice = user_input
-    conn = sqlite3.connect(sqlite_file)
-    c = conn.cursor()
+        # user enters col match information
+        update_to = input("What is the selected for column supposed to match?: ")
 
-    # build the select statement based on what column the user would like to search
-    if (selection == 1):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=name_field)
-    elif (selection == 2):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=price_field)
-    elif (selection == 3):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=description_field)
-    elif (selection == 4):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=num_in_stock_field)
-    elif (selection == 5):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=cost_to_make_field)
-    elif (selection == 6):
-        sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=num_sold_field)
+        # select and display one row that matches the input
+        # SELECT * FROM {tn} WHERE col_choice = user_input
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor()
 
-    # complete the sql statement ... if the variable is text we need to add quotations around it
-    if (selection == 1 or selection == 3):
-        sql_statement += '"' + update_to + '"'
-    else:
-        sql_statement += update_to
+        # build the select statement based on what column the user would like to search
+        if (selection == 1):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=name_field)
+        elif (selection == 2):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=price_field)
+        elif (selection == 3):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=description_field)
+        elif (selection == 4):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=num_in_stock_field)
+        elif (selection == 5):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=cost_to_make_field)
+        elif (selection == 6):
+            sql_statement = "SELECT * FROM {tn} WHERE {cn} LIKE ".format(tn=products_table, cn=num_sold_field)
 
-    # we also only want one result
-    sql_statement += " LIMIT 1"
-    c.execute(sql_statement)
+        # complete the sql statement ... if the variable is text we need to add quotations around it
+        if (selection == 1 or selection == 3):
+            sql_statement += '"' + update_to + '"'
+        else:
+            sql_statement += update_to
 
-    print()
-    print('RESULTS')
+        # we also only want one result
+        sql_statement += " LIMIT 1"
+        c.execute(sql_statement)
 
-    for row in c:
-
-        print("ID: ", str(row[0]))
-        print("NAME: ", row[1])
-        print("PRICE: ", row[2])
-        print("DESCRIPTION: ", row[3])
-        print("NUMBER IN STOCK: ", row[4])
-        print("COST TO MAKE: ", row[5])
-        print("NUMBER SOLD: ", row[6])
         print()
+        print('RESULTS')
 
-    conn.commit()
-    conn.close()
+        for row in c:
+
+            print("ID: ", str(row[0]))
+            print("NAME: ", row[1])
+            print("PRICE: ", row[2])
+            print("DESCRIPTION: ", row[3])
+            print("NUMBER IN STOCK: ", row[4])
+            print("COST TO MAKE: ", row[5])
+            print("NUMBER SOLD: ", row[6])
+            print()
+
+        conn.commit()
+        conn.close()
+
+    except ValueError:
+        print('There was an error selecting the row, please double check your data and try again.')
 
 def display_column_selection_menu():
 
